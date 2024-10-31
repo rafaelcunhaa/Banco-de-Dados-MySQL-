@@ -1,0 +1,29 @@
+
+Nome:Rafael da Cunha
+
+pacientes(id,nome,cpf,data_nacimento,endereço*,email)
+
+consultas(id,id_pac,id_med,data_colsulta,horário,id_status)
+	id_pac referencia paciente(id)
+	id_med referencia medico(id)
+	id_sta referencia status(id)
+
+médicos(id,nome,id_cons,id_rec,crm,especialidade,endereço*,email,telefone)
+
+receitas emitidas(id,id_med,medicamento,quantidade,data_emissão,id_pac)
+	id_med referencia medico(id)
+	id_pac refencia paciente(id)
+
+Endereco_paciente(id,id_pac, Rua, Número, CEP)
+	id_pac refencia paciente(id)
+
+Endereco_medico(id,id_med, Rua, Número, CEP)
+	id_med referencia medico(id)
+
+Telefone_paciente (id, id_pac, Número)
+	id_pac refencia paciente(id)
+
+Telefone_medico (id, id_med, Número)
+	id_med referencia medico(id)
+
+status(id,descriçao)
