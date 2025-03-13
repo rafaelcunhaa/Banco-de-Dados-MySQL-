@@ -1,0 +1,142 @@
+-----------1 Questão-------------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE InserirEndereco (
+    IN p_id_tutor INT,
+    IN p_cep VARCHAR(12),
+    IN p_rua VARCHAR(100),
+    IN p_numero INT,
+    IN p_complemento VARCHAR(50),
+    IN p_cidade VARCHAR(50),
+    IN p_uf CHAR(2),
+    OUT p_endereco_id INT
+)
+BEGIN
+    INSERT INTO Tutor_endereco (id_tutor, cep, rua, numero, complemento, cidade, uf)
+    VALUES (p_id_tutor, p_cep, p_rua, p_numero, p_complemento, p_cidade, p_uf);
+    
+    SET p_endereco_id = LAST_INSERT_ID();
+END //
+
+DELIMITER ;
+
+-----------2 Questão-------------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE AtualizarEmailTutor (
+    IN p_id_tutor INT,
+    IN p_novo_email VARCHAR(200)
+)
+BEGIN
+    UPDATE Tutor
+    SET email = p_novo_email
+    WHERE id = p_id_tutor;
+END //
+
+DELIMITER ;
+
+
+-----------3 Questão-------------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE ExcluirTutor (
+    IN p_id_tutor INT
+)
+BEGIN
+    DELETE FROM Animal WHERE id_tutor = p_id_tutor;
+    DELETE FROM Tutor_endereco WHERE id_tutor = p_id_tutor;
+    DELETE FROM Tutor WHERE id = p_id_tutor;
+END //
+
+DELIMITER ;
+
+
+-----------4 Questão-------------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE ListarConsultasPorData (
+    IN p_data DATE
+)
+BEGIN
+    SELECT 
+        c.dt AS data_consulta,
+        t.nome AS nome_responsavel,
+        a.nome AS nome_pet,
+        t.fone AS telefone_responsavel,
+        v.nome AS nome_veterinario
+    FROM Consulta c
+    JOIN Animal a ON c.id_animal = a.id
+    JOIN Tutor t ON a.id_tutor = t.id
+    JOIN Veterinario v ON c.id_vet = v.id
+    WHERE c.dt = p_data;
+END //
+
+DELIMITER ;
+
+
+-----------5 Questão-------------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE InserirVeterinario (
+    IN p_nome VARCHAR(100),
+    IN p_crmv VARCHAR(20),
+    IN p_email VARCHAR(200),
+    IN p_fone VARCHAR(16),
+    IN p_especialidade VARCHAR(100)
+)
+BEGIN
+    INSERT INTO Veterinario (nome, crmv, email, fone, especialidade)
+    VALUES (p_nome, p_crmv, p_email, p_fone, p_especialidade);
+    
+    SELECT * FROM Veterinario;
+END //
+
+DELIMITER ;
+
+
+-----------6 Questão-------------------------------------------
+
+DELIMITER //
+
+CREATE PROCEDURE AdicionarPet (
+    IN p_id_tutor INT,
+    IN p_nome VARCHAR(100),
+    IN p_peso DECIMAL(5,2),
+    IN p_raca VARCHAR(100),
+    IN p_especie VARCHAR(100),
+    IN p_cor VARCHAR(100),
+    IN p_sexo VARCHAR(10),
+    IN p_data_nasc DATE
+)
+BEGIN
+    INSERT INTO Animal (id_tutor, nome, peso, raca, especie, cor, sexo, data_nasc)
+    VALUES (p_id_tutor, p_nome, p_peso, p_raca, p_especie, p_cor, p_sexo, p_data_nasc);
+END //
+
+DELIMITER ;
+
+
+-----------7 Questão-------------------------------------------
+
+-----------8 Questão-------------------------------------------
+
+-----------9 Questão-------------------------------------------
+
+-----------10 Questão-------------------------------------------
+
+-----------11 Questão-------------------------------------------
+
+-----------12 Questão-------------------------------------------
+
+-----------13 Questão-------------------------------------------
+
+-----------14 Questão-------------------------------------------
+
+-----------15 Questão-------------------------------------------
+
+-----------16 Questão-------------------------------------------
